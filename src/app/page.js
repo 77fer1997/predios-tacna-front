@@ -43,12 +43,12 @@ export default function Home() {
         <section className={`content`}>
           <h1 className={`${norican.className}`}>¡Bienvenidos a Tacna!</h1>
           <div className="ilustracion_mujeres">
-            <Image
+            {/* <Image
               width={985}
               height={485}
               src={Mujeres}
               alt="bandera de tacna"
-            />
+            /> */}
           </div>
           <div className="bottom_waves">
             <svg
