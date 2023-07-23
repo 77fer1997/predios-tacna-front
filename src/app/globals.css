@@ -23,7 +23,6 @@
   background-image: url("../assets/images/bg-banner.jpg");
   position: relative;
   display: flex;
-  align-items: center;
 }
 .bottom_waves {
   position: absolute;
@@ -83,7 +82,6 @@ nav {
   left: 0;
   padding: 20px 8%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   z-index: 999;
 }
@@ -109,7 +107,7 @@ nav ul li a {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 1rem;
 }
 
 .content h1 {

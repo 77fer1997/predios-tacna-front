@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import Map, { Marker } from "react-map-gl";
-import Mujeres from "/src/assets/images/ilustracion_mujeres.png";
-import Image from "next/image";
 const MapExample = () => {
   return (
     <Map

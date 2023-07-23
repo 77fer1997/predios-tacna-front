@@ -3,7 +3,7 @@ import "./globals.css";
 import Image from "next/image";
 import { Montserrat, Open_Sans, Kaushan_Script } from "next/font/google";
 import Link from "next/link";
-import Mujeres from "/src/assets/images/ilustracion_mujeres.png";
+import Portada from "/src/assets/images/tacna.png";
 import Catedral from "/src/assets/images/catedral.jpg";
 import MapExample from "./components/Map";
 import Monumental from "/src/assets/images/zona-monumental.jpg";
@@ -43,12 +43,12 @@ export default function Home() {
         <section className={`content`}>
           <h1 className={`${norican.className}`}>¡Bienvenidos a Tacna!</h1>
           <div className="ilustracion_mujeres">
-            {/* <Image
+            <Image
               width={985}
               height={485}
-              src={Mujeres}
+              src={Portada}
               alt="bandera de tacna"
-            /> */}
+            />
           </div>
           <div className="bottom_waves">
             <svg
@@ -90,7 +90,7 @@ export default function Home() {
             </p>
           </div>
           <Image
-            src="/assets/tacna-city.jpg"
+            src={Monumental}
             width={200}
             height={200}
             alt="tacna-flag"

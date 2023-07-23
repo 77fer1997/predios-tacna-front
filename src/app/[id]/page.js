@@ -1,8 +1,7 @@
 import React from "react";
 
-import Carrousel from "./components/Carrousel";
 const PredioLanding = () => {
-  return <Carrousel />;
+  return <div>asdsd</div>;
 };
 
 export default PredioLanding;
