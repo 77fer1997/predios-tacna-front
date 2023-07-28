@@ -2,10 +2,13 @@ import { Button, Modal, Space, Typography } from "antd";
 import { Formik } from "formik";
 import { Form, Input, DatePicker } from "formik-antd";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePredioService } from "../../services/predios.services";
+import { addPredio, editPredio } from "@/store/features/prediosSlice";
 const { Text } = Typography;
-const { RangePicker } = DatePicker;
 const { TextArea } = Input;
-const EditModal = ({ isModalOpen, setIsModalOpen }) => {
+const AddModal = ({ isModalOpen, setIsModalOpen, record }) => {
+  const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -22,13 +25,21 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
     >
       <Formik
         initialValues={{
-          name: "",
-          descripcion: "",
-          latitud: "",
-          longitud: "",
+          name: record?.name,
+          description: record?.description,
+          lat: record?.lat,
+          lon: record?.lon,
         }}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={({ name, description, lat, lon }, { resetForm }) => {
+          updatePredioService(record?.id, name, description, lat, lon).then(
+            (res) => {
+              if (res) {
+                dispatch(editPredio(res));
+                resetForm();
+                handleOk();
+              }
+            }
+          );
         }}
       >
         {() => (
@@ -55,7 +66,7 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Descripción</Text>
-                <TextArea name="descripción" />
+                <TextArea name="description" />
               </Space>
 
               <Space
@@ -65,7 +76,7 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Latitud</Text>
-                <Input name="latitud" />
+                <Input name="lat" />
               </Space>
               <Space
                 direction="vertical"
@@ -74,7 +85,7 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Longitud</Text>
-                <Input name="Longitud" />
+                <Input name="lon" />
               </Space>
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button type="primary" htmlType="submit" key="1">
@@ -89,4 +100,4 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
   );
 };
 
-export default EditModal;
+export default AddModal;

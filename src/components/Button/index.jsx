@@ -1,7 +1,7 @@
 import React from 'react'
 import "./style.css"
-export const Button = ({ children }) => {
+export const Button = ({ children, type }) => {
     return (
-        <button className='btn'>{children}</button>
+        <button type={type} className='btn'>{children}</button>
     )
 }

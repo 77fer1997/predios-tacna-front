@@ -10,66 +10,55 @@ import {
 } from "@ant-design/icons";
 import AddModal from "./components/AddModal";
 import EditModal from "./components/EditModal";
-import { getPredios } from "./services/predios.services";
+import {
+  deletePredioService,
+  getPrediosService,
+} from "./services/predios.services";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePredio, getPredios } from "@/store/features/prediosSlice";
 
-const data = [
-  {
-    key: "1",
-    name: "Predio 1",
-    descripcion: "Este descripción es de prueba.",
-    latitud: "12312312321",
-    longitud: "151212151515",
-  },
-  {
-    key: "2",
-    name: "Predio 2",
-    descripcion: "Este descripción es de prueba.",
-    age: 42,
-    latitud: "London No. 1 Lake Park",
-    longitud: "151212151515",
-  },
-  {
-    key: "3",
-    name: "Predio 3",
-    descripcion: "Este descripción es de prueba.",
-    age: 32,
-    latitud: "1232132132",
-    longitud: "151212151515",
-  },
-];
 const { Title } = Typography;
+
 const Predios = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const dispatch = useDispatch();
+  const predios = useSelector((state) => state.prediosReducer.predios);
   const router = useRouter();
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const showEditModal = () => {
+  const showEditModal = (record) => {
     setIsEditModalOpen(true);
+    setSelectedRecord(record);
+  };
+  const deleteById = (id) => {
+    deletePredioService(id).then(({ id }) => {
+      dispatch(deletePredio(id));
+    });
   };
   const columns = [
     {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
     },
     {
       title: "Descripción",
-      dataIndex: "descripcion",
-      key: "descripcion",
+      dataIndex: "description",
+      key: "description",
     },
     {
       title: "Latitud",
-      dataIndex: "latitud",
-      key: "latitud",
+      dataIndex: "lat",
+      key: "lat",
     },
     {
       title: "Longitud",
-      dataIndex: "longitud",
-      key: "Longitud",
+      dataIndex: "lon",
+      key: "lon",
     },
     {
       title: "Action",
@@ -80,19 +69,21 @@ const Predios = () => {
             <EyeOutlined />
           </Tooltip>
           <Tooltip
-            onClick={showEditModal}
+            onClick={() => showEditModal(record)}
             placement="top"
             title="Editar Predio"
           >
             <EditOutlined />
           </Tooltip>
           <Tooltip placement="top" title="Eliminar Predio">
-            <DeleteOutlined />
+            <DeleteOutlined onClick={() => deleteById(record.id)} />
           </Tooltip>
           <Tooltip
             placement="top"
             title="Añadir Imagenes"
-            onClick={() => router.push("/Dashboard/predios/1")}
+            onClick={() =>
+              router.push(`/Dashboard/predios/${record.id}/images`)
+            }
           >
             <PlusOutlined />
           </Tooltip>
@@ -101,8 +92,8 @@ const Predios = () => {
     },
   ];
   useEffect(() => {
-    getPredios().then((res) => console.log(res));
-  });
+    getPrediosService().then((res) => dispatch(getPredios(res)));
+  }, []);
   return (
     <>
       <div className="title-wrapper">
@@ -112,12 +103,20 @@ const Predios = () => {
           <PlusOutlined />
         </Button>
       </div>
-      <Table columns={columns} dataSource={data} />
-      <AddModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      <EditModal
-        isModalOpen={isEditModalOpen}
-        setIsModalOpen={setIsEditModalOpen}
+      <Table
+        columns={columns}
+        dataSource={predios}
+        rowKey="id"
+        scroll={{ x: 1600, y: 400 }}
       />
+      <AddModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      {isEditModalOpen && (
+        <EditModal
+          isModalOpen={isEditModalOpen}
+          setIsModalOpen={setIsEditModalOpen}
+          record={selectedRecord}
+        />
+      )}
     </>
   );
 };

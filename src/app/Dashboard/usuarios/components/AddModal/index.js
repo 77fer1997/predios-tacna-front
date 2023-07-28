@@ -1,9 +1,94 @@
 import { Button, Modal, Space, Typography } from "antd";
-import { Formik } from "formik";
-import { Form, Input, DatePicker } from "formik-antd";
+import { Formik, useField, useFormikContext } from "formik";
+import { Form, Input } from "formik-antd";
 import React from "react";
+import { createUserService } from "../../services/users.services";
+import { addUser } from "@/store/features/usersSlice";
+import { useDispatch } from "react-redux";
 const { Text } = Typography;
+
+const PasswordField = (props) => {
+  const {
+    values: { name, lastnames },
+    touched,
+    setFieldValue,
+  } = useFormikContext();
+  const [field, meta] = useField(props);
+
+  React.useEffect(() => {
+    // set the value of textC, based on name and lastnames
+
+    if (
+      name.trim() !== "" &&
+      lastnames.trim() !== "" &&
+      touched.name &&
+      touched.lastnames
+    ) {
+      setFieldValue(
+        props.name,
+        `${name.toLowerCase().split(" ")[0]}${
+          lastnames.toLowerCase().split(" ")[0]
+        }123456`
+      );
+    }
+  }, [
+    lastnames,
+    name,
+    touched.name,
+    touched.lastnames,
+    setFieldValue,
+    props.name,
+  ]);
+
+  return (
+    <>
+      <Input {...props} {...field} />
+      {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
+    </>
+  );
+};
+const UserField = (props) => {
+  const {
+    values: { name, lastnames },
+    touched,
+    setFieldValue,
+  } = useFormikContext();
+  const [field, meta] = useField(props);
+
+  React.useEffect(() => {
+    // set the value of textC, based on name and lastnames
+
+    if (
+      name.trim() !== "" &&
+      lastnames.trim() !== "" &&
+      touched.name &&
+      touched.lastnames
+    ) {
+      setFieldValue(
+        props.name,
+        `${name.toLowerCase().charAt(0)}.${
+          lastnames.toLowerCase().split(" ")[0]
+        }`
+      );
+    }
+  }, [
+    lastnames,
+    name,
+    touched.name,
+    touched.lastnames,
+    setFieldValue,
+    props.name,
+  ]);
+
+  return (
+    <>
+      <Input {...props} {...field} />
+      {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
+    </>
+  );
+};
 const AddModal = ({ isModalOpen, setIsModalOpen }) => {
+  const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -23,9 +108,16 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
           name: "",
           lastnames: "",
           email: "",
+          user: "",
+          password: "",
         }}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={({ name, lastnames, email, user, password }) => {
+          createUserService({ name, lastnames, email, user, password }).then(
+            (res) => {
+              console.log(res);
+              dispatch(addUser(res));
+            }
+          );
         }}
       >
         {() => (
@@ -51,8 +143,8 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
-                <Text>Lastnames</Text>
-                <Input name="dni" />
+                <Text>Apellidos</Text>
+                <Input name="lastnames" />
               </Space>
 
               <Space
@@ -62,15 +154,6 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Email</Text>
-                <Input name="telefono" />
-              </Space>
-              <Space
-                direction="vertical"
-                style={{
-                  display: "flex",
-                }}
-              >
-                <Text>Usuario</Text>
                 <Input name="email" />
               </Space>
               <Space
@@ -79,8 +162,18 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
+                <Text>Usuario</Text>
+                <UserField name="user" disabled />
+              </Space>
+              <Space
+                direction="vertical"
+                style={{
+                  display: "flex",
+                }}
+              >
                 <Text>Password</Text>
-                <Input.Password name="password" />
+
+                <PasswordField disabled name="password" />
               </Space>
 
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>

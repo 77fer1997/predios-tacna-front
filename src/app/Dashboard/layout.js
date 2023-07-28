@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -9,8 +9,9 @@ import {
 } from "@ant-design/icons";
 import "./style.css";
 import { Layout, Menu, Button, theme, Space } from "antd";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 const { Header, Sider, Content } = Layout;
 const Dashboard = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -18,11 +19,17 @@ const Dashboard = ({ children }) => {
     token: { colorBgContainer },
   } = theme.useToken();
   const router = useRouter();
+  const { id } = useSelector((state) => state.loginReducer);
+
   return (
     <Layout className="container">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Space
-          style={{ display: "flex", justifyContent: "center", padding: "1rem" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "1rem",
+          }}
         >
           <Image
             src={`/assets/tacna-flag.png`}

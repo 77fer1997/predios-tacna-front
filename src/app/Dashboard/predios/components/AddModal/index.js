@@ -2,10 +2,14 @@ import { Button, Modal, Space, Typography } from "antd";
 import { Formik } from "formik";
 import { Form, Input, DatePicker } from "formik-antd";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createPredioService } from "../../services/predios.services";
+import { addPredio } from "@/store/features/prediosSlice";
 const { Text } = Typography;
-const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const AddModal = ({ isModalOpen, setIsModalOpen }) => {
+  const administrador_id = useSelector((state) => state.loginReducer.id);
+  const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -23,12 +27,24 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
       <Formik
         initialValues={{
           name: "",
-          descripcion: "",
-          latitud: "",
-          longitud: "",
+          description: "",
+          lat: "",
+          lon: "",
         }}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={({ name, description, lat, lon }, { resetForm }) => {
+          createPredioService(
+            name,
+            description,
+            lat,
+            lon,
+            administrador_id
+          ).then((res) => {
+            if (res) {
+              dispatch(addPredio(res));
+              resetForm();
+              handleOk();
+            }
+          });
         }}
       >
         {() => (
@@ -55,7 +71,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Descripción</Text>
-                <TextArea name="descripción" />
+                <TextArea name="description" />
               </Space>
 
               <Space
@@ -65,7 +81,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Latitud</Text>
-                <Input name="latitud" />
+                <Input name="lat" />
               </Space>
               <Space
                 direction="vertical"
@@ -74,7 +90,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Longitud</Text>
-                <Input name="Longitud" />
+                <Input name="lon" />
               </Space>
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button type="primary" htmlType="submit" key="1">

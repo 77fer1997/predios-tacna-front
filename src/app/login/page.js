@@ -1,19 +1,40 @@
 "use client";
 import { ErrorMessage, Formik } from "formik";
-import { Form, Input, InputNumber, Checkbox } from "formik-antd";
+import { Form, Input, Select } from "formik-antd";
 import React from "react";
 import "./style.css";
-import { Divider, Space, Typography, Select } from "antd";
+import { Space, Typography } from "antd";
 import { Button } from "@/components/Button";
-import { PT_Serif } from "next/font/google";
-import Link from "next/link";
+import { authLogin } from "./services/auth.services";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "@/store/features/adminAuthSlice";
 const { Title } = Typography;
 const { Option } = Select;
+const initialValues = {
+  user: "",
+  password: "",
+  type_user: "",
+};
 const Login = () => {
+  const router = useRouter();
+  const id = useSelector((state) => state.loginReducer.id);
+  const dispatch = useDispatch();
+
   return (
     <div className="login-content">
       <div className="login-wrapper">
-        <Formik initialValues={{}} onSubmit={() => {}}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={({ user, password, type_user }) => {
+            authLogin(user, password, type_user).then((res) => {
+              if (res) {
+                router.push("/Dashboard/usuarios");
+                dispatch(login(res));
+              }
+            });
+          }}
+        >
           {() => (
             <Form className="form">
               <Title level={3}>Iniciar Sesión</Title>
@@ -31,8 +52,8 @@ const Login = () => {
                   size={2}
                 >
                   <Title level={5}>Usuario</Title>
-                  <Input type="email" name="email" />
-                  <ErrorMessage name="email" component="div" />
+                  <Input name="user" />
+                  <ErrorMessage name="user" component="div" />
                 </Space>
                 <Space
                   direction="vertical"
@@ -57,16 +78,15 @@ const Login = () => {
                   <Select
                     placeholder="Selecciona el tipo de usuario"
                     style={{ width: "100%" }}
+                    name="type_user"
                   >
-                    <Option value="1">Administrador</Option>
-                    <Option value="2">Vendedor</Option>
+                    <Option value="administrador">Administrador</Option>
+                    <Option value="vendedor">Vendedor</Option>
                   </Select>
                 </Space>
               </Space>
               <div className="wrapper-button">
-                <Link href="/Dashboard/predios">
-                  <Button type="submit">Aceptar</Button>
-                </Link>
+                <Button type="submit">Aceptar</Button>
               </div>
             </Form>
           )}

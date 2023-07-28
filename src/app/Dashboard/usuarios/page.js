@@ -1,40 +1,34 @@
 "use client";
 import { Button, Tooltip, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import AddModal from "./components/AddModal";
 import EditModal from "./components/EditModal";
+import { deleteUserService, getUsersService } from "./services/users.services";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, getUsers } from "@/store/features/usersSlice";
 
-const data = [
-  {
-    key: "1",
-    name: "Usuario 1",
-    lastnames: "Apellido 1",
-    email: "usuario.apellido@gmail.com",
-  },
-  {
-    key: "2",
-    name: "Usuario 2",
-    lastnames: "Apellido 2",
-    email: "usuario.apellido@gmail.com",
-  },
-  {
-    key: "3",
-    name: "Usuario 3",
-    lastnames: "Apellido 3",
-    email: "usuario.apellido@gmail.com",
-  },
-];
 const { Title } = Typography;
 const Usuarios = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.usersReducer.usuarios);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const showEditModal = () => {
+  const showEditModal = (record) => {
     setIsEditModalOpen(true);
+    setSelectedRow(record);
+  };
+  const deleteById = (id) => {
+    console.log(id);
+    deleteUserService(id).then(({ id }) => {
+      dispatch(deleteUser(id));
+    });
   };
   const columns = [
     {
@@ -60,29 +54,33 @@ const Usuarios = () => {
       render: (_, record) => (
         <Space size="middle">
           <Tooltip placement="top" title="Editar Usuario">
-            <EditOutlined onClick={showEditModal} />
+            <EditOutlined onClick={() => showEditModal(record)} />
           </Tooltip>
           <Tooltip placement="top" title="Eliminar Usuario">
-            <DeleteOutlined />
+            <DeleteOutlined onClick={() => deleteById(record.id)} />
           </Tooltip>
         </Space>
       ),
     },
   ];
+  useEffect(() => {
+    console.log("hola");
+    getUsersService().then((res) => dispatch(getUsers(res)));
+  }, []);
   return (
     <>
       <div className="title-wrapper">
         <Title>Usuarios</Title>
         <Button onClick={showModal}>
-          Nuevo
           <PlusOutlined />
         </Button>
       </div>
-      <Table columns={columns} dataSource={data} />
+      <Table rowKey="id" columns={columns} dataSource={users} />
       <AddModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <EditModal
         isModalOpen={isEditModalOpen}
         setIsModalOpen={setIsEditModalOpen}
+        record={selectedRow}
       />
     </>
   );

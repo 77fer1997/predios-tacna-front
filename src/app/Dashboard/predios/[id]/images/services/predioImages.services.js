@@ -7,11 +7,12 @@ import {
   AlertError,
 } from "@/components/Alerts";
 
-const URLPREDIO = `${BASE_URL}/predio`;
-export const getPrediosService = async () => {
+const URLPREDIO = `${BASE_URL}/predio_images`;
+export const getPredioImagesService = async (id) => {
   try {
     ShowLoading();
-    const res = await axios.get(URLPREDIO);
+    const res = await axios.get(`${URLPREDIO}/${id}`);
+    console.log(res);
     HideLoading();
     return res.data;
   } catch (error) {
@@ -19,23 +20,19 @@ export const getPrediosService = async () => {
     AlertError(error.response.data.message);
   }
 };
-export const createPredioService = async (
-  name,
+export const createPredioImageService = async (
   description,
-  lat,
-  lon,
-  administrador_id
+  predio_id,
+  myfile
 ) => {
+  const formData = new FormData();
+  formData.append("descripcion", description);
+  formData.append("predio_id", predio_id);
+  formData.append("myfile", myfile);
   try {
-    console.log(name, description, lat, lon, administrador_id);
+    console.log(myfile);
     ShowLoading();
-    const res = await axios.post(URLPREDIO, {
-      name,
-      description,
-      lat,
-      lon,
-      administrador_id,
-    });
+    const res = await axios.post(URLPREDIO, formData);
     HideLoading();
     AlertSuccess(res.data.msg);
     return res.data;
@@ -44,15 +41,19 @@ export const createPredioService = async (
     AlertError(error.response.data.msg);
   }
 };
-export const updatePredioService = async (id, name, description, lat, lon) => {
+export const updatePredioImageService = async (
+  description,
+  myfile,
+  id,
+  old_url
+) => {
+  const formData = new FormData();
+  formData.append("descripcion", description);
+  formData.append("old_url", old_url);
+  myfile && formData.append("myfile", myfile);
   try {
     ShowLoading();
-    const res = await axios.patch(`${URLPREDIO}/${id}`, {
-      name,
-      description,
-      lat,
-      lon,
-    });
+    const res = await axios.patch(`${URLPREDIO}/${id}`, formData);
     HideLoading();
     AlertSuccess(res.data.msg);
     return res.data;
@@ -62,7 +63,7 @@ export const updatePredioService = async (id, name, description, lat, lon) => {
   }
 };
 
-export const deletePredioService = async (id) => {
+export const deletePredioImageService = async (id) => {
   try {
     ShowLoading();
     const res = await axios.delete(`${URLPREDIO}/${id}`);

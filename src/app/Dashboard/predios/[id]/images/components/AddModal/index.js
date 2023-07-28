@@ -1,38 +1,31 @@
 import { Button, Modal, Space, Typography, Upload } from "antd";
 import { Formik } from "formik";
-import { Form, Input, DatePicker } from "formik-antd";
+import { Form, Input } from "formik-antd";
 import React from "react";
-const { Text } = Typography;
 import { UploadOutlined } from "@ant-design/icons";
-
+import { createPredioImageService } from "../../services/predioImages.services";
+import { useParams } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { addPredioImage } from "@/store/features/predioImagesSlice";
+const { Text } = Typography;
 const { TextArea } = Input;
-const EditModal = ({ isModalOpen, setIsModalOpen }) => {
+const AddModal = ({ isModalOpen, setIsModalOpen }) => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
+  const handleChangeUpload = (setFieldValue, info) => {
+    console.log(info.file);
+    setFieldValue("image", info.file);
   };
   return (
     <Modal
-      title="Editar Imagen"
+      title="Agregar Imagen"
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -43,11 +36,17 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
           image: "",
           descripcion: "",
         }}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={({ descripcion, image }, { resetForm }) => {
+          createPredioImageService(descripcion, id, image).then((res) => {
+            if (res) {
+              dispatch(addPredioImage(res));
+              resetForm();
+              setIsModalOpen(false);
+            }
+          });
         }}
       >
-        {() => (
+        {({ setFieldValue }) => (
           <Form>
             <Space
               direction="vertical"
@@ -62,8 +61,12 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Imagen</Text>
-                <Upload {...props}>
-                  <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                <Upload
+                  maxCount={1}
+                  onChange={(info) => handleChangeUpload(setFieldValue, info)}
+                  beforeUpload={() => false}
+                >
+                  <Button icon={<UploadOutlined />}>Subir Archivos</Button>
                 </Upload>
               </Space>
               <Space
@@ -73,7 +76,7 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Descripción</Text>
-                <TextArea name="descripción" />
+                <TextArea name="descripcion" />
               </Space>
 
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -89,4 +92,4 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
   );
 };
 
-export default EditModal;
+export default AddModal;

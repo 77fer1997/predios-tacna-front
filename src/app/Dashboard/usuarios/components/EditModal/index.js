@@ -1,16 +1,20 @@
+import { editUser } from "@/store/features/usersSlice";
 import { Button, Modal, Space, Typography } from "antd";
 import { Formik } from "formik";
 import { Form, Input, DatePicker } from "formik-antd";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { updateUserService } from "../../services/users.services";
 const { Text } = Typography;
-const { RangePicker } = DatePicker;
-const EditModal = ({ isModalOpen, setIsModalOpen }) => {
+const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
+  const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  console.log(record);
   return (
     <Modal
       title="Editar Usuario"
@@ -21,14 +25,18 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
     >
       <Formik
         initialValues={{
-          name: "",
-          dni: "",
-          telefono: "",
-          email: "",
-          fecha: "",
+          name: record?.name,
+          lastnames: record?.lastnames,
+          email: record?.email,
         }}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={({ name, lastnames, email }) => {
+          console.log(record.id, name, lastnames, email);
+          updateUserService(record.id, name, lastnames, email).then((res) => {
+            if (res) {
+              dispatch(editUser(res));
+              handleOk();
+            }
+          });
         }}
       >
         {() => (
@@ -54,8 +62,8 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
-                <Text>Lastnames</Text>
-                <Input name="dni" />
+                <Text>Apellidos</Text>
+                <Input name="lastnames" />
               </Space>
 
               <Space
@@ -65,25 +73,7 @@ const EditModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Email</Text>
-                <Input name="telefono" />
-              </Space>
-              <Space
-                direction="vertical"
-                style={{
-                  display: "flex",
-                }}
-              >
-                <Text>Usuario</Text>
                 <Input name="email" />
-              </Space>
-              <Space
-                direction="vertical"
-                style={{
-                  display: "flex",
-                }}
-              >
-                <Text>Password</Text>
-                <Input.Password name="password" />
               </Space>
 
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>
