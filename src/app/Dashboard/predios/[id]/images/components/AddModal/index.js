@@ -1,5 +1,5 @@
 import { Button, Modal, Space, Typography, Upload } from "antd";
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import { Form, Input } from "formik-antd";
 import React from "react";
 import { UploadOutlined } from "@ant-design/icons";
@@ -7,8 +7,24 @@ import { createPredioImageService } from "../../services/predioImages.services";
 import { useParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addPredioImage } from "@/store/features/predioImagesSlice";
+import * as yup from "yup";
 const { Text } = Typography;
 const { TextArea } = Input;
+const validationSchema = yup.object().shape({
+  descripcion: yup.string().required("Este campo es necesario."),
+  image: yup
+    .mixed()
+    .test("required", "Este campo es necesario.", (file) => {
+      if (file) return true;
+      return false;
+    })
+    .test("fileSize", "El archivo es muy grande.", (file) => {
+      if (file) return file.size <= 100000000;
+    })
+    .test("fileType", "El archivo no es una imagen.", (file) => {
+      if (file) return file.type.includes("image");
+    }),
+});
 const AddModal = ({ isModalOpen, setIsModalOpen }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -36,6 +52,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
           image: "",
           descripcion: "",
         }}
+        validationSchema={validationSchema}
         onSubmit={({ descripcion, image }, { resetForm }) => {
           createPredioImageService(descripcion, id, image).then((res) => {
             if (res) {
@@ -68,6 +85,11 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 >
                   <Button icon={<UploadOutlined />}>Subir Archivos</Button>
                 </Upload>
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="image"
+                />
               </Space>
               <Space
                 direction="vertical"
@@ -77,6 +99,11 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
               >
                 <Text>Descripción</Text>
                 <TextArea name="descripcion" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="descripcion"
+                />
               </Space>
 
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>

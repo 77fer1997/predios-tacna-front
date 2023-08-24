@@ -28,7 +28,6 @@ export const usersSlice = createSlice({
       const usuarios = arrayAux.filter(
         (usuario) => usuario.id != action.payload
       );
-      console.log(usuarios);
 
       return { ...state, usuarios };
     },

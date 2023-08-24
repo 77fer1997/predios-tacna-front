@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
-/* const withVideos = require("next-videos");
-const nextConfig = withVideos(); */
+const withPlugins = require("next-compose-plugins");
+const withVideos = require("next-videos");
 
-/* module.exports = nextConfig; */
-
-module.exports = {
+module.exports = withPlugins([[withVideos, {}]], {
   images: {
     domains: ["res.cloudinary.com"],
   },
-};
+});

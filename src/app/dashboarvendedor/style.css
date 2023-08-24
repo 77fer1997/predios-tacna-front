@@ -1,0 +1,12 @@
+.container {
+  height: 100vh;
+  max-width: 100vw;
+  width: 100vw;
+}
+.header {
+  background-color: white;
+}
+.brand {
+  font-size: 2.3rem;
+  padding: 10px;
+}

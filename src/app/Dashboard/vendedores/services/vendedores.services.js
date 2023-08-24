@@ -17,21 +17,31 @@ export const getVendedoresService = async () => {
     console.log(error);
   }
 };
-export const createVendedorService = async ({
+export const createVendedorService = async (
   name,
-  lastnames,
+  lastname,
   email,
+  telefono,
   user,
   password,
-}) => {
+  fecha_inicio,
+  fecha_end,
+  predio_id,
+  predio_name
+) => {
   try {
     ShowLoading();
     const res = await axios.post(URLVENDEDOR, {
       name,
-      lastnames,
+      lastname,
       email,
+      telefono,
       user,
       password,
+      fecha_inicio,
+      fecha_end,
+      predio_id,
+      predio_name,
     });
     HideLoading();
     AlertSuccess(res.data.msg);
@@ -41,13 +51,28 @@ export const createVendedorService = async ({
     AlertError(error.response.data.message);
   }
 };
-export const updateVendedorService = async (id, name, lastnames, email) => {
+export const updateVendedorService = async (
+  id,
+  name,
+  lastname,
+  email,
+  telefono,
+  fecha_inicio,
+  fecha_end,
+  predio_id,
+  predio_name
+) => {
   try {
     ShowLoading();
     const res = await axios.patch(`${URLVENDEDOR}/${id}`, {
       name,
-      lastnames,
+      lastname,
       email,
+      telefono,
+      fecha_inicio,
+      fecha_end,
+      predio_id,
+      predio_name,
     });
     HideLoading();
     AlertSuccess(res.data.msg);

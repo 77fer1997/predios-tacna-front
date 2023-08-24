@@ -7,6 +7,7 @@ import {
   EditOutlined,
   EyeOutlined,
   PlusOutlined,
+  VideoCameraOutlined,
 } from "@ant-design/icons";
 import AddModal from "./components/AddModal";
 import EditModal from "./components/EditModal";
@@ -24,6 +25,7 @@ const Predios = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
+
   const dispatch = useDispatch();
   const predios = useSelector((state) => state.prediosReducer.predios);
   const router = useRouter();
@@ -44,11 +46,13 @@ const Predios = () => {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
+      responsive: ["md"],
     },
     {
       title: "Descripción",
       dataIndex: "description",
       key: "description",
+      responsive: ["md"],
     },
     {
       title: "Latitud",
@@ -65,9 +69,6 @@ const Predios = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Tooltip placement="top" title="Ver ubicación">
-            <EyeOutlined />
-          </Tooltip>
           <Tooltip
             onClick={() => showEditModal(record)}
             placement="top"
@@ -87,13 +88,22 @@ const Predios = () => {
           >
             <PlusOutlined />
           </Tooltip>
+          <Tooltip
+            placement="top"
+            title="Añadir Video"
+            onClick={() =>
+              router.push(`/Dashboard/predios/${record.id}/videos`)
+            }
+          >
+            <VideoCameraOutlined />
+          </Tooltip>
         </Space>
       ),
     },
   ];
   useEffect(() => {
     getPrediosService().then((res) => dispatch(getPredios(res)));
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <div className="title-wrapper">

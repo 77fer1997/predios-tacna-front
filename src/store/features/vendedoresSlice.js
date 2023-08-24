@@ -8,25 +8,24 @@ export const vendedoresSlice = createSlice({
   name: "vendedores",
   initialState,
   reducers: {
-    getUsers: (state, action) => {
+    getVendedores: (state, action) => {
       return { ...state, vendedores: action.payload };
     },
-    addUser: (state, action) => {
+    addVendedor: (state, action) => {
       console.log(action.payload);
       return { ...state, vendedores: [action.payload, ...state.vendedores] };
     },
-    editUser: (state, action) => {
+    editVendedor: (state, action) => {
       let auxArray = [...state.vendedores];
       console.log(auxArray, action.payload.id);
       let index = auxArray.findIndex((item) => item.id == action.payload.id);
       auxArray[index] = action.payload;
       return { ...state, vendedores: auxArray };
     },
-    deleteUser: (state, action) => {
+    deleteVendedor: (state, action) => {
       const arrayAux = [...state.vendedores];
-      console.log(action.payload);
       const vendedores = arrayAux.filter(
-        (vendedor) => vendedor.id != action.payload
+        (vendedor) => vendedor.id != action.payload.id
       );
       console.log(vendedores);
 
@@ -35,7 +34,7 @@ export const vendedoresSlice = createSlice({
   },
 });
 
-export const { getUsers, addUser, editUser, deleteUser } =
+export const { getVendedores, addVendedor, editVendedor, deleteVendedor } =
   vendedoresSlice.actions;
 
 export default vendedoresSlice.reducer;

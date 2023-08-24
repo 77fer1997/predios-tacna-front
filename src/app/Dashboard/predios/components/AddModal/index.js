@@ -1,20 +1,52 @@
-import { Button, Modal, Space, Typography } from "antd";
-import { Formik } from "formik";
+import { Button, Modal, Space, Typography, Upload } from "antd";
+import { ErrorMessage, Formik } from "formik";
 import { Form, Input, DatePicker } from "formik-antd";
 import React from "react";
+import { UploadOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { createPredioService } from "../../services/predios.services";
 import { addPredio } from "@/store/features/prediosSlice";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import * as yup from "yup";
 const { Text } = Typography;
 const { TextArea } = Input;
+const validationSchema = yup.object().shape({
+  name: yup.string().required("Este campo es necesario."),
+  description: yup.string().required("Este campo es necesario."),
+  lat: yup.string().required("Este campo es necesario."),
+  lon: yup.string().required("Este campo es necesario."),
+  video: yup
+    .mixed()
+    .test("required", "Debes ingresar una video 360º.", (file) => {
+      console.log(file);
+      // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
+      if (file) return true;
+      return false;
+    })
+    .test("fileSize", "El archivo es muy grande.", (file) => {
+      if (file) return file.size <= 100000000;
+      return false;
+    })
+    .test("fileType", "El archivo no es un video 360º.", (file) => {
+      if (file) return file.type === "video/mp4";
+      return false;
+    }),
+});
+
 const AddModal = ({ isModalOpen, setIsModalOpen }) => {
-  const administrador_id = useSelector((state) => state.loginReducer.id);
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+  const handleChangeUpload = (setFieldValue, info) => {
+    console.log(info.file);
+    setFieldValue("video", info.file);
   };
   return (
     <Modal
@@ -27,27 +59,25 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
       <Formik
         initialValues={{
           name: "",
+          video: "",
           description: "",
           lat: "",
           lon: "",
         }}
-        onSubmit={({ name, description, lat, lon }, { resetForm }) => {
-          createPredioService(
-            name,
-            description,
-            lat,
-            lon,
-            administrador_id
-          ).then((res) => {
-            if (res) {
-              dispatch(addPredio(res));
-              resetForm();
-              handleOk();
+        validationSchema={validationSchema}
+        onSubmit={({ name, video, description, lat, lon }, { resetForm }) => {
+          createPredioService(name, video, description, lat, lon, user.id).then(
+            (res) => {
+              if (res) {
+                dispatch(addPredio(res));
+                resetForm();
+                handleOk();
+              }
             }
-          });
+          );
         }}
       >
-        {() => (
+        {({ setFieldValue }) => (
           <Form>
             <Space
               direction="vertical"
@@ -63,6 +93,11 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
               >
                 <Text>Nombre</Text>
                 <Input name="name" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="name"
+                />
               </Space>
               <Space
                 direction="vertical"
@@ -72,6 +107,11 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
               >
                 <Text>Descripción</Text>
                 <TextArea name="description" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="description"
+                />
               </Space>
 
               <Space
@@ -82,6 +122,11 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
               >
                 <Text>Latitud</Text>
                 <Input name="lat" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="lat"
+                />
               </Space>
               <Space
                 direction="vertical"
@@ -91,6 +136,31 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
               >
                 <Text>Longitud</Text>
                 <Input name="lon" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="lon"
+                />
+              </Space>
+              <Space
+                direction="vertical"
+                style={{
+                  display: "flex",
+                }}
+              >
+                <Text>Video 360º</Text>
+                <Upload
+                  maxCount={1}
+                  onChange={(info) => handleChangeUpload(setFieldValue, info)}
+                  beforeUpload={() => false}
+                >
+                  <Button icon={<UploadOutlined />}>Subir Archivos</Button>
+                </Upload>
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="video"
+                />
               </Space>
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button type="primary" htmlType="submit" key="1">

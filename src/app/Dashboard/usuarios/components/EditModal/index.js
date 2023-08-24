@@ -1,11 +1,17 @@
 import { editUser } from "@/store/features/usersSlice";
 import { Button, Modal, Space, Typography } from "antd";
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import { Form, Input, DatePicker } from "formik-antd";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { updateUserService } from "../../services/users.services";
+import * as yup from "yup";
 const { Text } = Typography;
+const validationSchema = yup.object().shape({
+  name: yup.string().required("Este campo es necesario."),
+  lastnames: yup.string().required("Este campo es necesario."),
+  email: yup.string().required("Este campo es necesario."),
+});
 const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
   const dispatch = useDispatch();
   const handleOk = () => {
@@ -24,6 +30,7 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
       footer={null}
     >
       <Formik
+        validationSchema={validationSchema}
         initialValues={{
           name: record?.name,
           lastnames: record?.lastnames,
@@ -53,8 +60,13 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
                   display: "flex",
                 }}
               >
-                <Text>Nombre</Text>
+                <Text>Nombre *</Text>
                 <Input name="name" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="name"
+                />
               </Space>
               <Space
                 direction="vertical"
@@ -62,8 +74,13 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
                   display: "flex",
                 }}
               >
-                <Text>Apellidos</Text>
+                <Text>Apellidos *</Text>
                 <Input name="lastnames" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="lastnames"
+                />
               </Space>
 
               <Space
@@ -72,8 +89,13 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
                   display: "flex",
                 }}
               >
-                <Text>Email</Text>
+                <Text>Email *</Text>
                 <Input name="email" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="email"
+                />
               </Space>
 
               <Space style={{ display: "flex", justifyContent: "flex-end" }}>

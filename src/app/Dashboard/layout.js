@@ -1,29 +1,36 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import "./style.css";
-import { Layout, Menu, Button, theme, Space } from "antd";
-import { redirect, useRouter } from "next/navigation";
+import { Layout, Menu, theme, Space } from "antd";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+
+import { AuthContext } from "@/context/AuthContext";
 const { Header, Sider, Content } = Layout;
 const Dashboard = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const { logOut } = useContext(AuthContext);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   const router = useRouter();
-  const { id } = useSelector((state) => state.loginReducer);
-
   return (
     <Layout className="container">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
+        }}
+      >
         <Space
           style={{
             display: "flex",
@@ -44,7 +51,12 @@ const Dashboard = ({ children }) => {
           mode="inline"
           defaultSelectedKeys={["1"]}
           onClick={({ key }) => {
-            router.push(`/Dashboard/${key}`);
+            if (key !== "logout") {
+              router.push(`/Dashboard/${key}`);
+            } else {
+              logOut();
+              router.push("/login");
+            }
           }}
           items={[
             {
@@ -62,6 +74,11 @@ const Dashboard = ({ children }) => {
               icon: <UploadOutlined />,
               label: "Vendedores",
             },
+            {
+              key: "logout",
+              icon: <LogoutOutlined />,
+              label: "Salir",
+            },
           ]}
         />
       </Sider>
@@ -71,18 +88,7 @@ const Dashboard = ({ children }) => {
             padding: 0,
             background: colorBgContainer,
           }}
-        >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
-        </Header>
+        ></Header>
         <Content
           style={{
             margin: "24px 16px",

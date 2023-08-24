@@ -28,9 +28,15 @@ const Login = () => {
           initialValues={initialValues}
           onSubmit={({ user, password, type_user }) => {
             authLogin(user, password, type_user).then((res) => {
+              console.log(type_user);
               if (res) {
-                router.push("/Dashboard/usuarios");
-                dispatch(login(res));
+                if (type_user === "administrador") {
+                  router.push("/Dashboard/usuarios");
+                  dispatch(login(res));
+                } else {
+                  router.push("/dashboarvendedor/productos");
+                  dispatch(login(res));
+                }
               }
             });
           }}

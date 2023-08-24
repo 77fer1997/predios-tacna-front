@@ -23,6 +23,6 @@ export const authLogin = async (user, password, type_user) => {
   } catch (error) {
     console.log(error);
     HideLoading();
-    AlertError(error.response.data.message);
+    AlertError(error.response.data.msg);
   }
 };

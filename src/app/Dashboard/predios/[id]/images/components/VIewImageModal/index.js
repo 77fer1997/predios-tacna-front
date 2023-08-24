@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import React from "react";
+import { Modal } from "antd";
 import Image from "next/image";
 const ViewImageModal = ({ isModalOpen, setIsModalOpen, image }) => {
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -18,6 +15,7 @@ const ViewImageModal = ({ isModalOpen, setIsModalOpen, image }) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        width={1000}
       >
         <Image
           className="img-100"

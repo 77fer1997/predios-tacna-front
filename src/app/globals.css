@@ -1,16 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --morado: #773dbd;
   --moradoDark: #522d6d;
   --moradoLight: #c0a3f3;
   --verde: #b9bb17;
   --gris: #6b6b6b;
-  --dark: #1e1a34;
+  --dark: rgb(29, 26, 51);
   --light: #f8f6fc;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 .hero {
@@ -20,7 +24,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
-  background-image: url("../assets/images/bg-banner.jpg");
+  background-color: rgb(29, 26, 51, 0.4);
   position: relative;
   display: flex;
 }
@@ -53,7 +57,7 @@
   width: 100%;
 }
 .top_bot_waves_svg {
-  color: rgb(248, 246, 252);
+  color: white;
   max-width: 100%;
   height: auto;
   width: 100%;
@@ -80,10 +84,32 @@ nav {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 20px 8%;
+  padding: 30px 0px;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+  margin: 0 auto;
+}
+nav div {
+  width: 90%;
   display: flex;
   justify-content: space-between;
-  z-index: 999;
+}
+@media screen and (min-width: 700px) {
+  .nav div {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  nav div {
+    width: 70%;
+  }
+}
+.title-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 nav .logo {
   width: 40px;
@@ -100,21 +126,19 @@ nav ul li a {
   font-size: 17px;
 }
 .content {
-  text-align: left;
-  min-height: 100vh;
-  width: 100%;
+  width: 90%;
   margin: auto;
+  flex-direction: column;
+  row-gap: 1.5rem;
   position: relative;
   display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  align-items: center;
 }
 
 .content h1 {
-  margin-top: 5rem;
-  font-size: 48px;
+  font-size: 30px;
   color: #fff;
-  font-weight: 400;
+  font-weight: 700;
   margin-bottom: 10px;
   line-height: 1;
   letter-spacing: -1;
@@ -125,31 +149,12 @@ nav ul li a {
   width: 15%;
   margin: 1.875rem 0;
 }
-.content p {
-  font-size: 15px;
-  color: #fff;
-  line-height: 1.8;
-  font-weight: 400;
-}
 .button-wrapper {
   margin: 20px 0;
-}
-.content button {
-  text-decoration: none;
-  display: inline-block;
-  color: #fff;
-  font-size: 24px;
-  padding: 14px 70px;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(to right, #ef3d4e, #ae2865);
 }
 @media screen and (min-width: 700px) {
   .content h1 {
     font-size: 65px;
-  }
-  .content p {
-    font-size: 17px;
   }
 }
 @media screen and (min-width: 1400px) {
@@ -159,6 +164,7 @@ nav ul li a {
   right: 0;
   bottom: 0;
   z-index: -1;
+  object-fit: cover;
 }
 .relative {
   position: relative;
@@ -170,7 +176,7 @@ nav ul li a {
   color: var(--morado);
 }
 .description-section {
-  background-color: rgb(248, 246, 252);
+  background-color: white;
   padding: 40px 0;
 }
 .c-white {
@@ -181,7 +187,7 @@ nav ul li a {
 }
 .description-wrapper {
   height: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,7 +198,7 @@ nav ul li a {
 }
 
 .description__image {
-  width: 100%;
+  width: 80%;
   height: auto;
   border-radius: 10px;
 }
@@ -214,7 +220,6 @@ nav ul li a {
 }
 @media screen and (min-width: 700px) {
   .description-wrapper {
-    flex-direction: row;
     width: 80%;
     gap: 4rem;
   }
@@ -232,16 +237,20 @@ nav ul li a {
   .description-section {
     padding: 70px 0;
   }
+  .description {
+    flex-basis: 60rem;
+    flex-grow: 1;
+  }
   .description-wrapper {
     flex-direction: row;
     width: 70%;
     gap: 6rem;
   }
-  .description {
-    flex: 1;
-  }
+
   .description__image {
-    flex: 1;
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: 50%;
   }
   .description__title {
     text-align: left;
@@ -298,4 +307,14 @@ nav ul li a {
 .img-100 {
   width: 100%;
   height: auto;
+}
+
+.bg-trapecio {
+  background-image: url(https://mosquerarosado.com/wp-content/themes/mosquerarosado2023/images/bg_trapecio.svg);
+  background-position: top 4.5rem center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+.bg-trapecio-2 {
+  background-position: bottom center;
 }

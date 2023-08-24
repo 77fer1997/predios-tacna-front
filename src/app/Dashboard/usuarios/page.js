@@ -64,9 +64,8 @@ const Usuarios = () => {
     },
   ];
   useEffect(() => {
-    console.log("hola");
     getUsersService().then((res) => dispatch(getUsers(res)));
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <div className="title-wrapper">
@@ -75,7 +74,12 @@ const Usuarios = () => {
           <PlusOutlined />
         </Button>
       </div>
-      <Table rowKey="id" columns={columns} dataSource={users} />
+      <Table
+        rowKey="id"
+        columns={columns}
+        dataSource={users}
+        scroll={{ x: 1400, y: 400 }}
+      />
       <AddModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <EditModal
         isModalOpen={isEditModalOpen}

@@ -12,7 +12,6 @@ export const getPredioImagesService = async (id) => {
   try {
     ShowLoading();
     const res = await axios.get(`${URLPREDIO}/${id}`);
-    console.log(res);
     HideLoading();
     return res.data;
   } catch (error) {
@@ -30,7 +29,6 @@ export const createPredioImageService = async (
   formData.append("predio_id", predio_id);
   formData.append("myfile", myfile);
   try {
-    console.log(myfile);
     ShowLoading();
     const res = await axios.post(URLPREDIO, formData);
     HideLoading();

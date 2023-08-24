@@ -1,12 +1,17 @@
 import { Button, Modal, Space, Typography } from "antd";
-import { Formik, useField, useFormikContext } from "formik";
+import { ErrorMessage, Formik, useField, useFormikContext } from "formik";
 import { Form, Input } from "formik-antd";
 import React from "react";
 import { createUserService } from "../../services/users.services";
 import { addUser } from "@/store/features/usersSlice";
 import { useDispatch } from "react-redux";
+import * as yup from "yup";
 const { Text } = Typography;
-
+const validationSchema = yup.object().shape({
+  name: yup.string().required("Este campo es necesario."),
+  lastnames: yup.string().required("Este campo es necesario."),
+  email: yup.string().required("Este campo es necesario."),
+});
 const PasswordField = (props) => {
   const {
     values: { name, lastnames },
@@ -17,7 +22,6 @@ const PasswordField = (props) => {
 
   React.useEffect(() => {
     // set the value of textC, based on name and lastnames
-
     if (
       name.trim() !== "" &&
       lastnames.trim() !== "" &&
@@ -111,6 +115,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
           user: "",
           password: "",
         }}
+        validationSchema={validationSchema}
         onSubmit={({ name, lastnames, email, user, password }) => {
           createUserService({ name, lastnames, email, user, password }).then(
             (res) => {
@@ -134,8 +139,13 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
-                <Text>Nombre</Text>
+                <Text>Nombre *</Text>
                 <Input name="name" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="name"
+                />
               </Space>
               <Space
                 direction="vertical"
@@ -143,8 +153,13 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
-                <Text>Apellidos</Text>
+                <Text>Apellidos *</Text>
                 <Input name="lastnames" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="lastnames"
+                />
               </Space>
 
               <Space
@@ -153,8 +168,13 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
-                <Text>Email</Text>
+                <Text>Email *</Text>
                 <Input name="email" />
+                <ErrorMessage
+                  component="span"
+                  className="text-[12px] text-red-500"
+                  name="email"
+                />
               </Space>
               <Space
                 direction="vertical"
