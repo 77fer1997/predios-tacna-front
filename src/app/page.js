@@ -9,6 +9,7 @@ import Monumental from "/src/assets/images/zona-monumental.jpg";
 import { FaUser } from "react-icons/fa";
 import { TbCircleArrowRightFilled } from "react-icons/tb";
 import { getPrediosWithImagesService } from "./services/predios.service";
+import video from "../assets/tacna.mp4";
 const font = Poppins({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
@@ -33,13 +34,20 @@ export default async function Home() {
   return (
     <>
       <header className="hero">
-        <video
+        {/* <video
           className="back-video"
           src={require("../assets/videos/tacna.mp4")}
           autoPlay
           loop
           muted
-        />
+        /> */}
+        <video className="back-video" loop autoPlay muted>
+          <source
+            src="https://res.cloudinary.com/dxgh1api3/video/upload/v1692890760/video/zfze66mhoo2jkcnetkat.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
         <nav>
           <div>
             <Image
