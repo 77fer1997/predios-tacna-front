@@ -1,5 +1,5 @@
 "use client";
-import { Button, Tooltip, Typography } from "antd";
+import { Breadcrumb, Button, Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
@@ -8,6 +8,7 @@ import EditModal from "./components/EditModal";
 import { deleteUserService, getUsersService } from "./services/users.services";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "@/store/features/usersSlice";
+import Link from "next/link";
 
 const { Title } = Typography;
 const Usuarios = () => {
@@ -68,10 +69,22 @@ const Usuarios = () => {
   }, [dispatch]);
   return (
     <>
+      <Breadcrumb
+        items={[
+          {
+            title: "Home",
+          },
+          {
+            title: <Link href="/Dashboard/usuarios">Predios</Link>,
+          },
+        ]}
+        className="mb-4"
+      />
       <div className="title-wrapper">
-        <Title>Usuarios</Title>
-        <Button onClick={showModal}>
+        <Title level={3}>Usuarios</Title>
+        <Button type="primary" onClick={showModal}>
           <PlusOutlined />
+          Nuevo
         </Button>
       </div>
       <Table

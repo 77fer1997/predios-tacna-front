@@ -1,5 +1,5 @@
 "use client";
-import { Button, Tooltip, Typography } from "antd";
+import { Breadcrumb, Button, Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import {
@@ -19,6 +19,7 @@ import {
   deleteVendedor,
   getVendedores,
 } from "@/store/features/vendedoresSlice";
+import Link from "next/link";
 
 const { Title } = Typography;
 const Vendedores = () => {
@@ -96,9 +97,20 @@ const Vendedores = () => {
   }, [dispatch]);
   return (
     <>
+      <Breadcrumb
+        items={[
+          {
+            title: "Home",
+          },
+          {
+            title: <Link href="/Dashboard/vendedores">Predios</Link>,
+          },
+        ]}
+        className="mb-4"
+      />
       <div className="title-wrapper">
-        <Title>Vendedores</Title>
-        <Button onClick={showModal}>
+        <Title level={3}>Vendedores</Title>
+        <Button type="primary" onClick={showModal}>
           Nuevo
           <PlusOutlined />
         </Button>

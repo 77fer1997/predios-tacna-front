@@ -14,12 +14,27 @@ const { TextArea } = Input;
 const validationSchema = yup.object().shape({
   name: yup.string().required("Este campo es necesario."),
   description: yup.string().required("Este campo es necesario."),
-  lat: yup.string().required("Este campo es necesario."),
-  lon: yup.string().required("Este campo es necesario."),
+  lat: yup
+    .string()
+    .required("Este campo es necesario.")
+    .trim()
+    .matches(
+      "^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?[0-8]\\d((\\.)|\\.\\d{1,6})?)|(0*?90((\\.)|\\.0{1,6})?))$",
+      "Ingrese una latitud correcta."
+    ),
+
+  lon: yup
+    .string()
+    .required("Este campo es necesario.")
+    .trim()
+    .matches(
+      "^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?\\d\\d((\\.)|\\.\\d{1,6})?)|(0*?1[0-7]\\d((\\.)|\\.\\d{1,6})?)|(0*?180((\\.)|\\.0{1,6})?))$",
+      "Ingrese una longitud correcta."
+    ),
+
   video: yup
     .mixed()
     .test("required", "Debes ingresar una video 360º.", (file) => {
-      console.log(file);
       // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
       if (file) return true;
       return false;

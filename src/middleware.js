@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function middleware(req) {
   const jwt = req.cookies.get("admin");
 
-  if (req.nextUrl.pathname.startsWith("/Dashboard" || "/dashboardvendedor")) {
+  if (req.nextUrl.pathname.startsWith("/Dashboard" || "/dashboarvendedor")) {
     if (!jwt) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
@@ -19,7 +19,7 @@ export async function middleware(req) {
         return NextResponse.redirect(new URL("/Dashboard/usuarios", req.url));
       if (payload.type_user === "vendedor")
         return NextResponse.redirect(
-          new URL("/dashboardvendedor/productos", req.url)
+          new URL("/dashboarvendedor/productos", req.url)
         );
     }
   }

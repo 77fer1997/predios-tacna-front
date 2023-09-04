@@ -19,6 +19,17 @@ export const getPrediosService = async () => {
     AlertError(error.response.data.message);
   }
 };
+export const getPredioService = async (id) => {
+  try {
+    ShowLoading();
+    const res = await axios.get(`${URLPREDIO}/${id}`);
+    HideLoading();
+    return res.data;
+  } catch (error) {
+    HideLoading();
+    AlertError(error.response.data.message);
+  }
+};
 export const createPredioService = async (
   name,
   video,

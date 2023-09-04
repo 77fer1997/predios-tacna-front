@@ -1,5 +1,5 @@
 "use client";
-import { Button, Tooltip, Typography } from "antd";
+import { Breadcrumb, Button, Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import {
@@ -21,14 +21,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import ViewImageModal from "./components/VIewImageModal";
 import EditModal from "./components/EditModal";
+import { getPredioService } from "../../services/predios.services";
+import Link from "next/link";
 
 const { Title } = Typography;
 const Predio = () => {
+  const [predio, setPredio] = useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
   const predioImages = useSelector(
     (state) => state.predioImagesReducer.predioImages
   );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isViewImageModalOpen, setIsViewImageModalOpen] = useState(false);
@@ -92,13 +96,33 @@ const Predio = () => {
       dispatch(getPredioImages(res));
     });
   }, [dispatch, id]);
+  useEffect(() => {
+    getPredioService(id).then((res) => {
+      setPredio(res);
+    });
+  }, [dispatch, id]);
+
   return (
     <>
+      <Breadcrumb
+        items={[
+          {
+            title: "Home",
+          },
+          {
+            title: <Link href="/Dashboard/predios">Predios</Link>,
+          },
+          {
+            title: predio?.name,
+          },
+        ]}
+        className="mb-4"
+      />
       <div className="title-wrapper">
-        <Title>Imagenes - Plaza de Armas</Title>
-        <Button onClick={showModal}>
-          Nuevo
+        <Title level={3}>Imagenes - {predio?.name}</Title>
+        <Button onClick={showModal} type="primary">
           <PlusOutlined />
+          Nuevo
         </Button>
       </div>
       <Table columns={columns} dataSource={predioImages} rowKey="id" />

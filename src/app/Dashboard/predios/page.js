@@ -1,5 +1,5 @@
 "use client";
-import { Button, Tooltip, Typography } from "antd";
+import { Breadcrumb, Button, Tooltip, Typography, Layout, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import {
@@ -18,14 +18,17 @@ import {
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePredio, getPredios } from "@/store/features/prediosSlice";
+import Link from "next/link";
 
 const { Title } = Typography;
-
+const { Header } = Layout;
 const Predios = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
-
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
   const dispatch = useDispatch();
   const predios = useSelector((state) => state.prediosReducer.predios);
   const router = useRouter();
@@ -106,13 +109,26 @@ const Predios = () => {
   }, [dispatch]);
   return (
     <>
+      <Breadcrumb
+        items={[
+          {
+            title: "Home",
+          },
+          {
+            title: <Link href="/Dashboard/predios">Predios</Link>,
+          },
+        ]}
+        className="mb-4"
+      />
+
       <div className="title-wrapper">
-        <Title>Predios</Title>
-        <Button onClick={showModal}>
-          Nuevo
+        <Title level={3}>Predios</Title>
+        <Button type="primary" onClick={showModal}>
           <PlusOutlined />
+          Nuevo
         </Button>
       </div>
+
       <Table
         columns={columns}
         dataSource={predios}

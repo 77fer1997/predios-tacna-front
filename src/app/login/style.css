@@ -1,6 +1,6 @@
 .login-content {
   height: 100vh;
-  background-image: url("../../assets/images/zona-monumental.jpg");
+  background-image: url("/bg-login.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,12 +8,11 @@
 }
 .login-wrapper {
   background-color: white;
-  width: 90%;
+
   border-radius: 8px;
 }
 @media screen and (min-width: 1400px) {
   .login-wrapper {
-    width: 20%;
   }
 }
 .form {
@@ -22,7 +21,6 @@
   padding: 2rem;
 }
 .wrapper-button {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
 }

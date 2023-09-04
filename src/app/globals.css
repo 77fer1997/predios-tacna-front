@@ -24,7 +24,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
-  background-color: rgb(29, 26, 51, 0.4);
+  background-color: rgb(29, 26, 51, 0.5);
   position: relative;
   display: flex;
 }
@@ -79,7 +79,7 @@
   max-width: 100%;
   height: auto;
 }
-nav {
+.nav {
   width: 100%;
   position: absolute;
   top: 0;
@@ -90,7 +90,7 @@ nav {
   z-index: 999;
   margin: 0 auto;
 }
-nav div {
+.nav div {
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -101,7 +101,7 @@ nav div {
   }
 }
 @media screen and (min-width: 1200px) {
-  nav div {
+  .nav div {
     width: 70%;
   }
 }
@@ -111,16 +111,16 @@ nav div {
   justify-content: space-between;
   align-items: center;
 }
-nav .logo {
+.nav .logo {
   width: 40px;
   height: auto;
 }
-nav ul li {
+.nav ul li {
   list-style: none;
   display: inline-block;
   margin-left: 40px;
 }
-nav ul li a {
+.nav ul li a {
   text-decoration: none;
   color: #fff;
   font-size: 17px;
@@ -135,14 +135,6 @@ nav ul li a {
   align-items: center;
 }
 
-.content h1 {
-  font-size: 30px;
-  color: #fff;
-  font-weight: 700;
-  margin-bottom: 10px;
-  line-height: 1;
-  letter-spacing: -1;
-}
 .separator {
   height: 6px;
   background-color: #0072ac;
@@ -152,13 +144,7 @@ nav ul li a {
 .button-wrapper {
   margin: 20px 0;
 }
-@media screen and (min-width: 700px) {
-  .content h1 {
-    font-size: 65px;
-  }
-}
-@media screen and (min-width: 1400px) {
-}
+
 .back-video {
   position: absolute;
   right: 0;

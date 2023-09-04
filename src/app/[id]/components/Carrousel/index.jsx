@@ -1,16 +1,44 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  FreeMode,
+  Thumbs,
+} from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
+import "../../style.css";
 const Carrousel = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
     <>
+      {/* <Swiper
+        // install Swiper modules
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={50}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log("slide change")}
+        className=""
+      >
+        {images.map((image, index) => {
+          return (
+            <SwiperSlide key={index} className="">
+              <img src={image} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper> */}
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -19,18 +47,18 @@ const Carrousel = ({ images }) => {
         spaceBetween={10}
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2"
+        modules={[FreeMode, Navigation, Pagination, Thumbs, Scrollbar]}
+        className="mySwiper2 rounded-3xl"
       >
         {images.map((image, index) => {
           return (
-            <SwiperSlide key={index}>
+            <SwiperSlide className=" rounded-3xl" key={index}>
               <img src={image} />
             </SwiperSlide>
           );
         })}
       </Swiper>
-      <Swiper
+      {/*  <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
         slidesPerView={4}
@@ -46,7 +74,7 @@ const Carrousel = ({ images }) => {
             </SwiperSlide>
           );
         })}
-      </Swiper>
+      </Swiper> */}
     </>
   );
 };
