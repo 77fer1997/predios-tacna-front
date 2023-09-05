@@ -98,7 +98,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Descripción</Text>
-                <TextArea name="descripcion" />
+                <TextArea placeholder="Parque la juventud" name="descripcion" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"

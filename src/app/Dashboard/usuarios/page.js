@@ -37,16 +37,19 @@ const Usuarios = () => {
       dataIndex: "name",
       key: "name",
       render: (text) => <p>{text}</p>,
+      width: "20%",
     },
     {
       title: "Apellidos",
       dataIndex: "lastnames",
       key: "lastnames",
+      width: "20%",
     },
     {
       title: "Correo",
       dataIndex: "email",
       key: "email",
+      width: "20%",
     },
 
     {
@@ -72,7 +75,7 @@ const Usuarios = () => {
       <Breadcrumb
         items={[
           {
-            title: "Home",
+            title: "Inicio",
           },
           {
             title: <Link href="/Dashboard/usuarios">Predios</Link>,

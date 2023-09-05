@@ -5,7 +5,7 @@ import { Pannellum, PannellumVideo } from "pannellum-react";
 const Picture360 = ({ video }) => {
   console.log(video);
   return (
-    <div className="App">
+    <div className="App w-full h-[70vh]">
       {/*  <Pannellum
         width="100%"
         height="500px"
@@ -23,7 +23,7 @@ const Picture360 = ({ video }) => {
         video={video}
         loop
         width="100%"
-        height="800px"
+        height="100%"
         pitch={5}
         yaw={180}
         hfov={140}

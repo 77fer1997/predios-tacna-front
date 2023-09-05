@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 export const Video360 = ({ video }) => {
   return (
-    <section className="lg:w-[80%] m-auto pt-20 pb-12 ">
+    <section className="w-[90%] lg:w-[80%] m-auto pt-20 pb-12 ">
       <motion.h3
         initial="hidden"
         whileInView="visible"

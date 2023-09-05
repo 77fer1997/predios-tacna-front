@@ -60,7 +60,10 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>URL</Text>
-                <Input name="url" />
+                <Input
+                  name="url"
+                  placeholder="https://www.youtube.com/watch?v=XnqQxGAOdhA"
+                />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"

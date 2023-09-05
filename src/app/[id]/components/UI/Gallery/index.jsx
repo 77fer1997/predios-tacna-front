@@ -41,7 +41,7 @@ export const Gallery = ({ predio }) => {
       </nav>
       <section
         id="inicio"
-        className="h-[calc(100vh-80px)] bg-predio bg-no-repeat bg-cover"
+        className="h-[calc(100vh-80px)] bg-predio bg-no-repeat bg-cover py-6"
       >
         <div className="w-[90%] h-full lg:w-[80%] m-auto lg:flex">
           <motion.div
@@ -53,7 +53,7 @@ export const Gallery = ({ predio }) => {
               hidden: { y: 200, opacity: 0 },
               visible: { y: 0, opacity: 1 },
             }}
-            className="lg:w-[50%] flex flex-col items-center justify-center lg:px-24"
+            className="lg:w-[50%] mb-6 flex flex-col items-center justify-center lg:px-24"
           >
             <h3
               className={`${poppins.className} text-[#1A1617] lg:font-semibold lg:text-4xl font-medium text-center mb-5`}

@@ -48,12 +48,12 @@ const Carrousel = ({ images }) => {
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Pagination, Thumbs, Scrollbar]}
-        className="mySwiper2 rounded-3xl"
+        className="mySwiper2 rounded-3xl md:h-[70vh]"
       >
         {images.map((image, index) => {
           return (
             <SwiperSlide className=" rounded-3xl" key={index}>
-              <img src={image} />
+              <img src={image} className=" min-h-[250px]" />
             </SwiperSlide>
           );
         })}

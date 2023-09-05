@@ -49,27 +49,29 @@ const Predios = () => {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
-      responsive: ["md"],
+      width: "20%",
     },
     {
       title: "Descripción",
       dataIndex: "description",
       key: "description",
-      responsive: ["md"],
     },
     {
       title: "Latitud",
       dataIndex: "lat",
       key: "lat",
+      width: "10%",
     },
     {
       title: "Longitud",
       dataIndex: "lon",
       key: "lon",
+      width: "10%",
     },
     {
       title: "Action",
       key: "action",
+      width: "15%",
       render: (_, record) => (
         <Space size="middle">
           <Tooltip
@@ -112,7 +114,7 @@ const Predios = () => {
       <Breadcrumb
         items={[
           {
-            title: "Home",
+            title: "Inicio",
           },
           {
             title: <Link href="/Dashboard/predios">Predios</Link>,

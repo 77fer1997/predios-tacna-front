@@ -9,7 +9,7 @@ import { addPredio } from "@/store/features/prediosSlice";
 import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import * as yup from "yup";
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const { TextArea } = Input;
 const validationSchema = yup.object().shape({
   name: yup.string().required("Este campo es necesario."),
@@ -65,7 +65,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
   };
   return (
     <Modal
-      title="Agregar Predio"
+      title={<Title level={4}> Agregar Predio</Title>}
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -106,8 +106,8 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   display: "flex",
                 }}
               >
-                <Text>Nombre</Text>
-                <Input name="name" />
+                <Text>Nombre *</Text>
+                <Input placeholder="Plaza de armas" name="name" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -121,7 +121,10 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Descripción</Text>
-                <TextArea name="description" />
+                <TextArea
+                  placeholder="La plaza de armas es un lugar histórico..."
+                  name="description"
+                />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -136,7 +139,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Latitud</Text>
-                <Input name="lat" />
+                <Input name="lat" placeholder="-16.3774464" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -150,7 +153,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Longitud</Text>
-                <Input name="lon" />
+                <Input name="lon" placeholder="-71.5418369" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"

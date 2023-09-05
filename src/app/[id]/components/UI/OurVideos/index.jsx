@@ -10,7 +10,7 @@ const poppins = Poppins({
 export const OurVideos = ({ videos }) => {
   return (
     <section className="bg-[#F8F8FF]">
-      <div className="lg:w-[80%] m-auto pt-20 pb-12 ">
+      <div className="w-[90%] lg:w-[80%] m-auto pt-20 pb-12 ">
         <motion.h3
           initial="hidden"
           whileInView="visible"

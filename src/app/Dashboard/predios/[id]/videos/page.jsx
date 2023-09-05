@@ -70,7 +70,7 @@ const Predio = () => {
       <Breadcrumb
         items={[
           {
-            title: "Home",
+            title: "Inicio",
           },
           {
             title: <Link href="/Dashboard/predios">Predios</Link>,

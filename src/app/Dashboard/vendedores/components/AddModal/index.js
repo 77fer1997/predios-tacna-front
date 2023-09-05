@@ -184,7 +184,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Nombre</Text>
-                <Input name="name" />
+                <Input placeholder="Jose Manuel" name="name" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -198,7 +198,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Apellidos</Text>
-                <Input name="lastname" />
+                <Input placeholder="Gutierrez Porta" name="lastname" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -213,7 +213,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Email</Text>
-                <Input name="email" />
+                <Input placeholder="josemanuel@gmail.com" name="email" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -227,7 +227,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Teléfono</Text>
-                <Input name="telefono" />
+                <Input placeholder="924775484" name="telefono" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"

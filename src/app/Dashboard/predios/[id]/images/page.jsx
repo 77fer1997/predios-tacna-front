@@ -66,10 +66,12 @@ const Predio = () => {
       title: "Descripción",
       dataIndex: "descripcion",
       key: "descripcion",
+      width: "20%",
     },
     {
       title: "Action",
       key: "action",
+      width: "20%",
       render: (_, record) => (
         <>
           <Space size="middle">
@@ -107,7 +109,7 @@ const Predio = () => {
       <Breadcrumb
         items={[
           {
-            title: "Home",
+            title: "Inicio",
           },
           {
             title: <Link href="/Dashboard/predios">Predios</Link>,

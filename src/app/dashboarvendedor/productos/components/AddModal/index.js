@@ -90,7 +90,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Nombre</Text>
-                <Input name="name" />
+                <Input placeholder="Polo XL" name="name" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -104,7 +104,10 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Descripción</Text>
-                <TextArea name="descripcion" />
+                <TextArea
+                  placeholder="Polo de lana importado de USA"
+                  name="descripcion"
+                />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
@@ -118,7 +121,7 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                 }}
               >
                 <Text>Precio</Text>
-                <Input name="price" />
+                <Input placeholder="120.00" name="price" />
                 <ErrorMessage
                   component="span"
                   className="text-[12px] text-red-500"
