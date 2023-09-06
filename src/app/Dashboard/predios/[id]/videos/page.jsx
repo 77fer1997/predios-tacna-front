@@ -85,7 +85,7 @@ const Predio = () => {
         <Title level={3}>Videos - {predio?.name}</Title>
         <Button onClick={showModal} type="primary">
           <PlusOutlined />
-          Nuevo
+          Nuevo video
         </Button>
       </div>
       <Table columns={columns} dataSource={predioVideos} rowKey="id" />

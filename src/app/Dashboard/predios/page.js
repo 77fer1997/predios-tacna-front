@@ -114,7 +114,7 @@ const Predios = () => {
       <Breadcrumb
         items={[
           {
-            title: "Inicio",
+            title: <Link href="/Dashboard/usuarios">Inicio</Link>,
           },
           {
             title: <Link href="/Dashboard/predios">Predios</Link>,
@@ -127,7 +127,7 @@ const Predios = () => {
         <Title level={3}>Predios</Title>
         <Button type="primary" onClick={showModal}>
           <PlusOutlined />
-          Nuevo
+          Nuevo predio
         </Button>
       </div>
 

@@ -87,7 +87,7 @@ const Usuarios = () => {
         <Title level={3}>Usuarios</Title>
         <Button type="primary" onClick={showModal}>
           <PlusOutlined />
-          Nuevo
+          Nuevo usuario
         </Button>
       </div>
       <Table

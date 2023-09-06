@@ -103,7 +103,7 @@ const Vendedores = () => {
             title: "Home",
           },
           {
-            title: <Link href="/Dashboard/vendedores">Predios</Link>,
+            title: <Link href="/Dashboard/vendedores">Vendedor</Link>,
           },
         ]}
         className="mb-4"
@@ -111,7 +111,7 @@ const Vendedores = () => {
       <div className="title-wrapper">
         <Title level={3}>Vendedores</Title>
         <Button type="primary" onClick={showModal}>
-          Nuevo
+          Nuevo vendedor
           <PlusOutlined />
         </Button>
       </div>

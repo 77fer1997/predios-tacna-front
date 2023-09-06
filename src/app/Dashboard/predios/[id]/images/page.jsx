@@ -124,7 +124,7 @@ const Predio = () => {
         <Title level={3}>Imagenes - {predio?.name}</Title>
         <Button onClick={showModal} type="primary">
           <PlusOutlined />
-          Nuevo
+          Nuevo imagen
         </Button>
       </div>
       <Table columns={columns} dataSource={predioImages} rowKey="id" />

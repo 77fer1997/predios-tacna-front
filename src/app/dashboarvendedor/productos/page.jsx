@@ -84,8 +84,8 @@ const Productos = () => {
       <div className="title-wrapper">
         <Title>Productos</Title>
         <Button type="primary" onClick={showModal}>
-          Nuevo
           <PlusOutlined />
+          Nuevo producto
         </Button>
       </div>
       <Table
