@@ -13,10 +13,36 @@ const poppins = Poppins({
 export const Description = () => {
   return (
     <>
-      <section className="relative pt-8 pb-8 lg:pt-16 lg:pb-16 bg-[top_4.5rem_center] bg-cuadrilatero bg-cover bg-no-repeat">
-        <div className="w-[90%] lg:w-[80%] m-auto lg:flex lg:min-h-[80vh]">
+      <section className="relative pt-8 pb-8 lg:pt-16 lg:pb-16 bg-[bottom_center] bg-cuadrilatero bg-cover bg-no-repeat">
+        <motion.h2
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { y: 200, opacity: 0 },
+            visible: { y: 0, opacity: 1 },
+          }}
+          className={`${poppins.className} mb-2 text-[#1A1617] lg:text-4xl text-center font-semibold tracking-normal`}
+        >
+          Lugares mas visitados
+        </motion.h2>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { y: 200, opacity: 0 },
+            visible: { y: 0, opacity: 1 },
+          }}
+          className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-10`}
+        >
+          Un vistazo a los lugares mas visitados de nuestra ciudad.
+        </motion.p>
+        <div className="w-[90%] lg:w-[80%] m-auto lg:flex lg:min-h-[60vh]">
           <div className="lg:w-[50%] lg:px-[5rem] flex flex-col items-center justify-center ">
-            <motion.h2
+            <motion.h3
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false }}
@@ -25,10 +51,10 @@ export const Description = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-center text-2xl sm:text-4xl lg:text-4xl font-semibold tracking-tight mb-2`}
+              className={`${poppins.className} text-center text-2xl sm:text-4xl lg:text-3xl font-medium tracking-tight mb-2`}
             >
               La Plaza de Armas
-            </motion.h2>
+            </motion.h3>
             <motion.p
               initial="hidden"
               whileInView="visible"
@@ -38,7 +64,7 @@ export const Description = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-12`}
+              className={`${poppins.className} text-[#1A1617] font-light lg:text-xl text-center mb-12`}
             >
               La Plaza de Armas de Tacna es el escenario de numerosos eventos
               culturales y festividades a lo largo del año. Las festividades
@@ -70,7 +96,7 @@ export const Description = () => {
         </div>
       </section>
       <section className="relative pt-8 pb-8 lg:pt-16 lg:pb-16 bg-[top_4.5rem_center] bg-cuadrilatero bg-cover bg-no-repeat">
-        <div className="w-[90%] lg:w-[80%] lg:flex-row m-auto flex flex-col-reverse lg:min-h-[80vh]">
+        <div className="w-[90%] lg:w-[80%] lg:flex-row m-auto flex flex-col-reverse lg:min-h-[60vh]">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -100,7 +126,7 @@ export const Description = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-center text-2xl sm:text-4xl lg:text-4xl font-semibold tracking-tight mb-2`}
+              className={`${poppins.className} text-left text-2xl sm:text-4xl lg:text-3xl font-medium tracking-tight mb-2`}
             >
               La Catedral
             </motion.h2>
@@ -113,7 +139,7 @@ export const Description = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-12`}
+              className={`${poppins.className} text-[#1A1617] font-light lg:text-xl text-center mb-12`}
             >
               La Catedral es el principal lugar de culto católico en Tacna y
               alberga una importante colección de arte religioso, incluyendo

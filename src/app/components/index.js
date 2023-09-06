@@ -4,4 +4,7 @@ export * from "./UI/Benefits";
 export * from "./UI/Description";
 export * from "./UI/Hero";
 export * from "./UI/Map";
+export * from "./UI/Mision";
+export * from "./UI/Vision";
+export * from "./UI/Whoarewe";
 export * from "./UI";

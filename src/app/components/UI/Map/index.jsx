@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 export const Map = ({ predios }) => {
   return (
-    <section id="map" className={`${poppins.className} mt-16 bg-[#f8f8ff]`}>
+    <section id="map" className={`${poppins.className} `}>
       <div className=" m-auto pt-20 w-[90%] sm:w-[80%] lg:w-[70%]">
         <motion.h2
           initial="hidden"

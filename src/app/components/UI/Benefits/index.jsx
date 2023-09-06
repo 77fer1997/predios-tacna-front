@@ -37,7 +37,7 @@ const benefits = [
 ];
 export const Benefits = () => {
   return (
-    <section className="w-[90%] lg:w-[80%] m-auto mt-16">
+    <section className="w-[90%] lg:w-[80%] m-auto mt-16 lg:pb-14">
       <motion.h2
         initial="hidden"
         whileInView="visible"
@@ -60,11 +60,11 @@ export const Benefits = () => {
           hidden: { y: 200, opacity: 0 },
           visible: { y: 0, opacity: 1 },
         }}
-        className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-6`}
+        className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-10`}
       >
         Conoce los servicios que te ofrecemos.
       </motion.p>
-      <div className="flex flex-wrap gap-6 justify-around mt-10">
+      <div className="flex flex-wrap gap-6 justify-around">
         {benefits.map((benefit) => (
           <BenefitCard
             key={benefit.id}
