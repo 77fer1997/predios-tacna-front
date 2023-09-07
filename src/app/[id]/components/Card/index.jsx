@@ -8,10 +8,10 @@ const poppins = Poppins({
 });
 const ShopCard = ({ product }) => {
   return (
-    <div className="w-[410px] max-w-[300px] shadow-[0_5px_15px_0_rgba(0,0,0,0.2)] flex-1 rounded-lg transition-all hover:scale-110">
+    <div className="w-[410px] max-w-full lg:max-w-[400px] min-w-[300px] shadow-[0_5px_15px_0_rgba(0,0,0,0.2)] flex-1 rounded-lg transition-all lg:hover:scale-110">
       <div className=" ">
         <Image
-          className="w-full h-auto"
+          className="w-full h-[300px]  object-cover max-h-80"
           src={product.imagen}
           alt={product.name}
           width={1920}

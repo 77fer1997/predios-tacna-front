@@ -1,22 +1,46 @@
+"use client";
 import React from "react";
 import ShopCard from "../../Card";
+import { Poppins } from "next/font/google";
+import { motion } from "framer-motion";
 
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  fallback: "roboto",
+});
 export const Products = ({ productos }) => {
   return (
-    <section className="bg-[url('https://mosquerarosado.com/wp-content/themes/mosquerarosado2023/images/bg_trapecio.svg')]">
+    <section className="w-[90%] lg:w-[80%] m-auto ">
       <div className="wrapper pt-20 pb-12 ">
-        <h3
-          className={`${poppins.className} text-[#1A1617] lg:text-[1.95rem] lg:font-semibold text-4xl font-medium text-center mb-5`}
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { y: 200, opacity: 0 },
+            visible: { y: 0, opacity: 1 },
+          }}
+          className={`${poppins.className} text-center text-2xl lg:text-4xl font-semibold mb-2`}
         >
           Tienda
-        </h3>
-        <p
-          className={`${poppins.className} text-center opacity-70 lg:text-[18px] text-[1.25rem]  mb-8`}
+        </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }}
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { y: 200, opacity: 0 },
+            visible: { y: 0, opacity: 1 },
+          }}
+          className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-12`}
         >
           Sumérgete en una experiencia única: ¡nuestro video en 360 grados te
           llevará a lugares asombrosos como nunca antes! No te lo pierdas.
-        </p>
-        <div className="flex flex-wrap">
+        </motion.p>
+        <div className="flex flex-wrap gap-8">
           {productos.map((producto) => {
             return <ShopCard key={producto.id} product={producto} />;
           })}

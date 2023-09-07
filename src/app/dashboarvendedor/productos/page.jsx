@@ -1,5 +1,5 @@
 "use client";
-import { Button, Tooltip, Typography } from "antd";
+import { Breadcrumb, Button, Tooltip, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
@@ -12,6 +12,8 @@ import {
   getProductosService,
 } from "./services/productos.services";
 import { deleteProducto, getProductos } from "@/store/features/productosSlice";
+import Link from "next/link";
+import Image from "next/image";
 
 const { Title } = Typography;
 
@@ -53,7 +55,15 @@ const Productos = () => {
       key: "imagen",
       render: (_, record) => (
         <a target="_blank" href={record?.imagen}>
-          {record?.imagen}
+          {
+            <Image
+              className="w-[40px] h-auto"
+              src={record?.imagen}
+              alt={record?.description}
+              width={600}
+              height={600}
+            />
+          }
         </a>
       ),
     },
@@ -81,8 +91,19 @@ const Productos = () => {
   }, [dispatch]);
   return (
     <>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link href="/dashboarvendedor/productos">Inicio</Link>,
+          },
+          {
+            title: "Predios",
+          },
+        ]}
+        className="mb-4"
+      />
       <div className="title-wrapper">
-        <Title>Productos</Title>
+        <Title level={3}>Productos</Title>
         <Button type="primary" onClick={showModal}>
           <PlusOutlined />
           Nuevo producto

@@ -124,6 +124,7 @@ const Predios = () => {
       />
 
       <div className="title-wrapper">
+        --
         <Title level={3}>Predios</Title>
         <Button type="primary" onClick={showModal}>
           <PlusOutlined />
