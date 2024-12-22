@@ -13,7 +13,6 @@ const poppins = Poppins({
   fallback: "roboto",
 });
 const MapExample = ({ places }) => {
-  const router = useRouter();
   const coordinates = { lat: -18.0058762, lng: -70.2524758 };
 
   const Marker = ({ place }) => (
@@ -54,9 +53,9 @@ const MapExample = ({ places }) => {
         center={coordinates}
         defaultZoom={15}
         margin={[50, 50, 50, 50]}
-        /*  onChange={""}
-        onChildClick={""} 
-        lat={-18.0058762} lng={-70.2524758}*/
+      /*  onChange={""}
+      onChildClick={""} 
+      lat={-18.0058762} lng={-70.2524758}*/
       >
         {places?.map((place) => (
           <Marker

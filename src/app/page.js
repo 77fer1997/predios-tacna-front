@@ -13,11 +13,8 @@ import {
   Vision,
 } from "./components/UI";
 
-async function fetchPredios() {
-  return await getPrediosWithImagesService();
-}
 export default async function Home() {
-  const predios = await fetchPredios();
+  const predios = await getPrediosWithImagesService();
   return (
     <>
       <Hero />
