@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
   };
   useEffect(() => {
     validateUser();
-    console.log(jwt);
   }, [jwt]);
   return (
     <AuthContext.Provider value={{ user, logOut }}>

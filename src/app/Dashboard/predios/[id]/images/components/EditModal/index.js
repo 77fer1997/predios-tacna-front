@@ -24,7 +24,6 @@ const validationSchema = yup.object().shape({
     }),
 });
 const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
-  console.log(record);
   const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
@@ -33,7 +32,6 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
     setIsModalOpen(false);
   };
   const handleChangeUpload = (setFieldValue, info) => {
-    console.log(info.file);
     setFieldValue("image", info.file);
   };
   return (

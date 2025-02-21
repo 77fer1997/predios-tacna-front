@@ -42,7 +42,6 @@ const Predio = () => {
     setIsModalOpen(true);
   };
   const showEditModal = (record) => {
-    console.log(record);
     setIsEditModalOpen(true);
     setRecordSelected(record);
   };

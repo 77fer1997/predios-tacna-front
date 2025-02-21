@@ -12,12 +12,10 @@ export const prediosSlice = createSlice({
       return { ...state, predios: action.payload };
     },
     addPredio: (state, action) => {
-      console.log(action.payload);
       return { ...state, predios: [action.payload, ...state.predios] };
     },
     editPredio: (state, action) => {
       let auxArray = [...state.predios];
-      console.log(auxArray, action.payload.id);
       let index = auxArray.findIndex((item) => item.id == action.payload.id);
       auxArray[index] = action.payload;
       return { ...state, predios: auxArray };

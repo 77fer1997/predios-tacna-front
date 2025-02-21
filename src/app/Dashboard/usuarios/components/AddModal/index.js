@@ -30,8 +30,7 @@ const PasswordField = (props) => {
     ) {
       setFieldValue(
         props.name,
-        `${name.toLowerCase().split(" ")[0]}${
-          lastnames.toLowerCase().split(" ")[0]
+        `${name.toLowerCase().split(" ")[0]}${lastnames.toLowerCase().split(" ")[0]
         }123456`
       );
     }
@@ -70,8 +69,7 @@ const UserField = (props) => {
     ) {
       setFieldValue(
         props.name,
-        `${name.toLowerCase().charAt(0)}.${
-          lastnames.toLowerCase().split(" ")[0]
+        `${name.toLowerCase().charAt(0)}.${lastnames.toLowerCase().split(" ")[0]
         }`
       );
     }
@@ -119,7 +117,6 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
         onSubmit={({ name, lastnames, email, user, password }) => {
           createUserService({ name, lastnames, email, user, password }).then(
             (res) => {
-              console.log(res);
               dispatch(addUser(res));
             }
           );

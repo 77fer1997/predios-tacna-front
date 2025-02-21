@@ -20,7 +20,6 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  console.log(record);
   return (
     <Modal
       title="Editar Usuario"
@@ -37,7 +36,6 @@ const EditModal = ({ isModalOpen, setIsModalOpen, record }) => {
           email: record?.email,
         }}
         onSubmit={({ name, lastnames, email }) => {
-          console.log(record.id, name, lastnames, email);
           updateUserService(record.id, name, lastnames, email).then((res) => {
             if (res) {
               dispatch(editUser(res));

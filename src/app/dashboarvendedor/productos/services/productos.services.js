@@ -33,7 +33,6 @@ export const createProductoService = async (
   formData.append("vendedor_id", vendedor_id);
   formData.append("myfile", myfile);
   try {
-    console.log(formData);
     ShowLoading();
     const res = await axios.post(URLPREDIO, formData);
     HideLoading();
@@ -52,7 +51,6 @@ export const updateProductoService = async (
   old_url,
   myfile
 ) => {
-  console.log(name, description, price, old_url, myfile);
   const formData = new FormData();
   formData.append("name", name);
   formData.append("description", description);
@@ -61,9 +59,7 @@ export const updateProductoService = async (
   myfile !== "" && formData.append("myfile", myfile);
   try {
     ShowLoading();
-    console.log(formData);
     const res = await axios.patch(`${URLPREDIO}/${id}`, formData);
-    console.log(res);
     HideLoading();
     AlertSuccess(res.data.msg);
     return res.data;

@@ -46,7 +46,6 @@ export const createPredioService = async (
   formData.append("lon", lon);
   formData.append("administrador_id", administrador_id);
   try {
-    console.log(name, description, lat, lon, administrador_id);
     ShowLoading();
     const res = await axios.post(URLPREDIO, formData);
     HideLoading();

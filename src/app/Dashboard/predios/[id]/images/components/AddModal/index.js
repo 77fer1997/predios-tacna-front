@@ -36,7 +36,6 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
     setIsModalOpen(false);
   };
   const handleChangeUpload = (setFieldValue, info) => {
-    console.log(info.file);
     setFieldValue("image", info.file);
   };
   return (

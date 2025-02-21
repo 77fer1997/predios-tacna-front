@@ -19,7 +19,6 @@ const Dashboard = ({ children }) => {
     token: { colorBgContainer },
   } = theme.useToken();
   const router = useRouter();
-  console.log(user);
   return (
     <Layout>
       <Header className="flex justify-between items-center">
@@ -44,12 +43,6 @@ const Dashboard = ({ children }) => {
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
           style={{
             background: colorBgContainer,
           }}

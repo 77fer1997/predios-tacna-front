@@ -26,7 +26,6 @@ const Usuarios = () => {
     setSelectedRow(record);
   };
   const deleteById = (id) => {
-    console.log(id);
     deleteUserService(id).then(({ id }) => {
       dispatch(deleteUser(id));
     });

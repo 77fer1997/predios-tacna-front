@@ -12,7 +12,6 @@ export const productosSlice = createSlice({
       return { ...state, productos: action.payload };
     },
     addProducto: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         productos: [action.payload, ...state.productos],
@@ -20,7 +19,6 @@ export const productosSlice = createSlice({
     },
     editProducto: (state, action) => {
       let auxArray = [...state.productos];
-      console.log(auxArray, action.payload.id);
       let index = auxArray.findIndex((item) => item.id == action.payload.id);
       auxArray[index] = action.payload;
       return { ...state, productos: auxArray };

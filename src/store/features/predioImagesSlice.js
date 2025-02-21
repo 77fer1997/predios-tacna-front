@@ -12,7 +12,6 @@ export const predioImagesSlice = createSlice({
       return { ...state, predioImages: action.payload };
     },
     addPredioImage: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         predioImages: [action.payload, ...state.predioImages],
@@ -20,7 +19,6 @@ export const predioImagesSlice = createSlice({
     },
     editPredioImage: (state, action) => {
       let auxArray = [...state.predioImages];
-      console.log(auxArray, action.payload.id);
       let index = auxArray.findIndex((item) => item.id == action.payload.id);
       auxArray[index] = action.payload;
       return { ...state, predioImages: auxArray };

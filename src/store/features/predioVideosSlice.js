@@ -12,7 +12,6 @@ export const predioVideosSlice = createSlice({
       return { ...state, predioVideos: action.payload };
     },
     addPredioVideo: (state, action) => {
-      console.log(action.payload);
       return {
         ...state,
         predioVideos: [action.payload, ...state.predioVideos],

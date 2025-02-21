@@ -12,23 +12,19 @@ export const usersSlice = createSlice({
       return { ...state, usuarios: action.payload };
     },
     addUser: (state, action) => {
-      console.log(action.payload);
       return { ...state, usuarios: [action.payload, ...state.usuarios] };
     },
     editUser: (state, action) => {
       let auxArray = [...state.usuarios];
-      console.log(auxArray, action.payload.id);
       let index = auxArray.findIndex((item) => item.id == action.payload.id);
       auxArray[index] = action.payload;
       return { ...state, usuarios: auxArray };
     },
     deleteUser: (state, action) => {
       const arrayAux = [...state.usuarios];
-      console.log(action.payload);
       const usuarios = arrayAux.filter(
         (usuario) => usuario.id != action.payload
       );
-
       return { ...state, usuarios };
     },
   },

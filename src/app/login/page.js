@@ -34,7 +34,6 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={({ user, password, type_user }) => {
             authLogin(user, password, type_user).then((res) => {
-              console.log(type_user);
               if (res) {
                 if (type_user === "administrador") {
                   router.push("/Dashboard/usuarios");

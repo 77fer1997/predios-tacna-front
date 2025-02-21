@@ -51,7 +51,6 @@ const validationSchema = yup.object().shape({
 
 const AddModal = ({ isModalOpen, setIsModalOpen }) => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const dispatch = useDispatch();
   const handleOk = () => {
     setIsModalOpen(false);
@@ -60,7 +59,6 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
     setIsModalOpen(false);
   };
   const handleChangeUpload = (setFieldValue, info) => {
-    console.log(info.file);
     setFieldValue("video", info.file);
   };
   return (

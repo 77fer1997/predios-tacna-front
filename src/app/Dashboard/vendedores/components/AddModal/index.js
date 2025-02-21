@@ -29,8 +29,7 @@ const PasswordField = (props) => {
     ) {
       setFieldValue(
         props.name,
-        `${name.toLowerCase().split(" ")[0]}${
-          lastname.toLowerCase().split(" ")[0]
+        `${name.toLowerCase().split(" ")[0]}${lastname.toLowerCase().split(" ")[0]
         }123456`
       );
     }
@@ -69,8 +68,7 @@ const UserField = (props) => {
     ) {
       setFieldValue(
         props.name,
-        `${name.toLowerCase().charAt(0)}.${
-          lastname.toLowerCase().split(" ")[0]
+        `${name.toLowerCase().charAt(0)}.${lastname.toLowerCase().split(" ")[0]
         }`
       );
     }
@@ -148,7 +146,6 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
           },
           { resetForm }
         ) => {
-          console.log(predio_id);
           createVendedorService(
             name,
             lastname,
@@ -269,7 +266,6 @@ const AddModal = ({ isModalOpen, setIsModalOpen }) => {
                   placeholder="Selecciona un predio"
                   style={{ width: "100%" }}
                   onChange={(value, { children }) => {
-                    console.log(value);
                     setFieldValue("predio_name", children);
                     setFieldValue("predio_id", value);
                   }}

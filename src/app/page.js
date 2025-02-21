@@ -1,6 +1,4 @@
-import React from "react";
 import "./globals.css";
-import MapExample from "./components/Map";
 import { getPrediosWithImagesService } from "./services/predios.service";
 
 import {

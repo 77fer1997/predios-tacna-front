@@ -16,12 +16,10 @@ export const authLogin = async (user, password, type_user) => {
       password,
       type_user,
     });
-    console.log(res);
     HideLoading();
     AlertSuccess(res.data.msg);
     return res.data;
   } catch (error) {
-    console.log(error);
     HideLoading();
     AlertError(error.response.data.msg);
   }
