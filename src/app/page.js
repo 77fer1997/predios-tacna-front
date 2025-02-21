@@ -11,6 +11,8 @@ import {
   Vision,
 } from "./components/UI";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const predios = await getPrediosWithImagesService();
   return (

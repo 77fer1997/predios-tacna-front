@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
 import {
   Navigation,
   Pagination,
   Scrollbar,
-  A11y,
   FreeMode,
   Thumbs,
 } from "swiper/modules";
