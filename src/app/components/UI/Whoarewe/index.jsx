@@ -24,9 +24,9 @@ export const Whoarewe = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className}   text-left text-2xl sm:text-4xl lg:text-6xl lg:font-bold font-medium mb-2`}
+              className={`${poppins.className} text-left text-2xl sm:text-4xl lg:text-6xl lg:font-bold font-medium mb-2`}
             >
-              <span className=" text-transparent bg-clip-text bg-gradient-to-r from-[#264653] to-[#fb8500]">
+              <span className="bg-clip-text text-[#001021] ">
                 ¿Quienes <br /> Somos?
               </span>
             </motion.h3>
@@ -39,7 +39,7 @@ export const Whoarewe = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-left mb-12`}
+              className={`${poppins.className} text-[#1A1617] text-opacity-80 font-light lg:text-2xl text-left mb-12`}
             >
               Somos un equipo multidisciplinario de estudiantes especializados
               en diseñar mejores experiencias, a través de la tecnología y la

@@ -10,6 +10,8 @@ import {
   Mision,
   Vision,
 } from "./components/UI";
+import { TamaSection } from "./components/UI/TamaSection";
+import { Footer } from "./components/layout/Footer";
 
 export const dynamic = "force-dynamic";
 
@@ -21,9 +23,11 @@ export default async function Home() {
       <Whoarewe />
       <Mision />
       <Vision />
+      <TamaSection />
       <Benefits />
       <Description />
       <Map predios={predios} />
+      <Footer />
     </>
   );
 }

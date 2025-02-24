@@ -22,7 +22,7 @@ export const Map = ({ predios }) => {
             hidden: { y: 200, opacity: 0 },
             visible: { y: 0, opacity: 1 },
           }}
-          className={`${poppins.className}  text-center text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2`}
+          className={`${poppins.className} text-[#001021] text-center text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2`}
         >
           Ubícanos
         </motion.h2>
@@ -35,7 +35,7 @@ export const Map = ({ predios }) => {
             hidden: { y: 200, opacity: 0 },
             visible: { y: 0, opacity: 1 },
           }}
-          className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-12`}
+          className={`${poppins.className} text-[#001021] text-opacity-80 font-light lg:text-2xl text-center mb-12`}
         >
           Conoce los servicios que te ofrecemos.
         </motion.p>

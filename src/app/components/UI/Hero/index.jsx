@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { Poppins, Open_Sans, Outfit } from "next/font/google";
+
+import { motion } from "framer-motion";
 import { FaUser } from "react-icons/fa";
 import { TbCircleArrowRightFilled } from "react-icons/tb";
-import Image from "next/image";
-import { Poppins, Open_Sans, Outfit } from "next/font/google";
-import { motion } from "framer-motion";
 
 const font = Poppins({
   weight: ["400", "500", "700"],
@@ -38,7 +39,7 @@ export const Hero = () => {
             <Image
               width={80}
               height={100}
-              src="/assets/tacna-flag.png"
+              src="/assets/tama-logo.png"
               alt="bandera de tacna"
               className="logo"
             />
@@ -47,11 +48,11 @@ export const Hero = () => {
           <ul>
             <li className="list_item">
               <Link
-                className={`${font.className} hover:underline bg-[#EA6A1F] px-6 py-4 no-underline rounded-full text-white hover:opacity-90`}
+                className={`${font.className} hover:underline bg-[#00c6f7] block px-2 py-1 md:flex md:gap-2 md:px-6 md:py-4 no-underline rounded-full text-white hover:opacity-90`}
                 href="/login"
               >
-                <FaUser className={`mr-1 text-base`} color="white" />
-                <p className="text-md inline-block">Iniciar Sesión</p>
+                <FaUser className={`mr-0 hidden md:mr-1 md:block md:text-[18px] text-[10px]`} color="white" />
+                <p className="text-[12px] md:text-[16px] md:inline-block">Iniciar Sesión</p>
               </Link>
             </li>
           </ul>
@@ -64,7 +65,7 @@ export const Hero = () => {
           transition={{ duration: 0.6 }}
           className={`${outfit.className} text-center text-white text-4xl lg:text-8xl`}
         >
-          ¡Bienvenidos a <span className="text-[#fb8500]">Tacna</span>!
+          ¡Bienvenidos a <Image src='/assets/tama-logo.png' className="w-20 h-8 md:w-28 md:h-8 lg:w-56 lg:h-16" alt="logo de tama" width={384} height={145} /> !
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -84,7 +85,7 @@ export const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           href="#map"
-          className="bg-[#EA6A1F] px-8 py-4 no-underline text-xl rounded-full text-white hover:opacity-90"
+          className="bg-[#00c6f7] px-8 py-4 no-underline text-xl rounded-full text-white hover:opacity-90"
         >
           Ver mapa
           <TbCircleArrowRightFilled className="align-middle ml-2 text-2xl" />

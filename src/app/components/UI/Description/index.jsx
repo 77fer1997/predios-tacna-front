@@ -23,7 +23,7 @@ export const Description = () => {
             hidden: { y: 200, opacity: 0 },
             visible: { y: 0, opacity: 1 },
           }}
-          className={`${poppins.className} mb-2 text-[#1A1617] lg:text-4xl text-center font-semibold tracking-normal`}
+          className={`${poppins.className} mb-2 text-[#001021] lg:text-4xl text-center font-semibold tracking-normal`}
         >
           Lugares mas visitados
         </motion.h2>
@@ -36,7 +36,7 @@ export const Description = () => {
             hidden: { y: 200, opacity: 0 },
             visible: { y: 0, opacity: 1 },
           }}
-          className={`${poppins.className} text-[#1A1617] font-light lg:text-2xl text-center mb-10`}
+          className={`${poppins.className} text-[#001021] text-opacity-80 font-light lg:text-2xl text-center mb-10`}
         >
           Un vistazo a los lugares mas visitados de nuestra ciudad.
         </motion.p>
@@ -51,7 +51,7 @@ export const Description = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-center text-2xl sm:text-4xl lg:text-3xl font-medium tracking-tight mb-2`}
+              className={`${poppins.className} text-[#001021] text-center text-2xl sm:text-4xl lg:text-3xl font-medium tracking-tight mb-2`}
             >
               La Plaza de Armas
             </motion.h3>
@@ -64,7 +64,7 @@ export const Description = () => {
                 hidden: { y: 200, opacity: 0 },
                 visible: { y: 0, opacity: 1 },
               }}
-              className={`${poppins.className} text-[#1A1617] font-light lg:text-xl text-center mb-12`}
+              className={`${poppins.className} text-[#001021] text-opacity-80 font-light lg:text-xl text-center mb-12`}
             >
               La Plaza de Armas de Tacna es el escenario de numerosos eventos
               culturales y festividades a lo largo del año. Las festividades

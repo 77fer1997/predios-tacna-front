@@ -2,11 +2,11 @@
 import React from "react";
 import { Poppins } from "next/font/google";
 import { BenefitCard } from "../../BenefitCard";
-import Image from "next/image";
 import map from "/src/assets/images/mapa.png";
 import grades360 from "/src/assets/images/360.jpeg";
 import recuerdos from "/src/assets/images/recuerdos.jpeg";
-import { easeIn, motion } from "framer-motion";
+import { motion } from "framer-motion";
+
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
@@ -47,7 +47,7 @@ export const Benefits = () => {
           hidden: { y: 200, opacity: 0 },
           visible: { y: 0, opacity: 1 },
         }}
-        className={`${poppins.className} mb-2 text-[#1A1617] lg:text-4xl text-center font-semibold tracking-normal`}
+        className={`${poppins.className} mb-2 text-[#001021] lg:text-4xl text-center font-semibold tracking-normal`}
       >
         ¿Qué podemos hacer por tí?
       </motion.h2>

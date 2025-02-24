@@ -35,7 +35,7 @@ const MapExample = ({ places }) => {
         <div className="flex justify-between items-center">
           <h3 className="font-medium text-sm">{place.name}</h3>
           <Link
-            className={`${poppins.className} hover:underline bg-[#EA6A1F] px-3 py-1 no-underline rounded-full text-white hover:opacity-90`}
+            className={`${poppins.className} hover:underline bg-[#00c6f7] px-3 py-1 no-underline rounded-full text-white hover:opacity-90`}
             href={`/${place.id}/#inicio`}
           >
             <p className="text-md inline-block">Visitar</p>
@@ -46,7 +46,7 @@ const MapExample = ({ places }) => {
   );
 
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div style={{ height: "100vh", width: "100%" }} className="mb-14">
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyCehanTfefCDNKVwfBk3PCifZyP8Yj3dxg" }}
         defaultCenter={coordinates}
